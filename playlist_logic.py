@@ -154,24 +154,11 @@ def most_common_artist(songs: List[Song]) -> Tuple[str, int]:
     return items[0]
 
 
-def search_songs(
-    songs: List[Song],
-    query: str,
-    field: str = "artist",
-) -> List[Song]:
-    """Return songs matching the query on a given field."""
-    if not query:
-        return songs
-
-    q = query.lower().strip()
-    filtered: List[Song] = []
-
-    for song in songs:
-        value = str(song.get(field, "")).lower()
-        if value and value in q:
-            filtered.append(song)
-
-    return filtered
+def search_songs(songs, query, field="artist"):
+    """Search songs by a specific field."""
+     # Force convert query to lowercase
+    query = query.lower() 
+    return [song for song in songs if query in song.get(field, "").lower()] 
 
 
 def lucky_pick(

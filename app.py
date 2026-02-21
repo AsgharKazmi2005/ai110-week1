@@ -213,7 +213,10 @@ def profile_sidebar():
     profile["favorite_genre"] = st.sidebar.selectbox(
         "Favorite genre",
         options=["rock", "lofi", "pop", "jazz", "electronic", "ambient", "other"],
-        index=0,
+        index=["rock", "lofi", "pop", "jazz", "electronic", "ambient", "other"].index(
+            # Use the current value or default to "rock"
+            profile.get("favorite_genre", "rock")
+        ),  
     )
 
     profile["include_mixed"] = st.sidebar.checkbox(
@@ -319,9 +322,28 @@ def lucky_section(playlists):
         st.session_state.history = history
 
 
+def lucky_pick(playlists, mode="any"):
+    """Pick a random song from the specified playlist mode."""
+    import random
+
+    if mode == "any":
+        all_songs = [song for playlist in playlists.values() for song in playlist]
+    else:
+         # Use lowercase keys for playlists instead
+        all_songs = playlists.get(mode.lower(), []) 
+
+    if not all_songs:
+        return None
+
+    return random.choice(all_songs)
+
 def stats_section(playlists):
     """Render statistics based on the playlists."""
     st.header("Playlist stats")
+    # Check if all playlists are empty (edge case)
+    if not any(playlists.values()):
+        st.write("No songs available to compute stats.")
+        return
 
     stats = compute_playlist_stats(playlists)
 
@@ -343,7 +365,6 @@ def stats_section(playlists):
         )
     else:
         st.write("No top artist yet.")
-
 
 def history_section():
     """Render the pick history overview."""
