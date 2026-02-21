@@ -111,3 +111,11 @@ If you finish early or want an extra challenge, try one of these:
 - Stay curious. The unpredictability is intentional and part of the experience.
 
 When you finish, Playlist Chaos will feel more predictable, and you will have taken your first steps into AI-assisted debugging.
+
+_____________________________
+
+TF Summary
+
+In the lucky_pick function, I fixed an issue where playlist keys were not properly accessed due to case sensitivity. This required understanding how string methods like .lower() ensure consistent key handling, a common area where students may overlook how data is stored. In the profile_sidebar function, we addressed the dropdown defaulting to "rock" by dynamically setting the default value based on the user's previous selection. This fix maintains the state in the UI, which students often forget when working with session data. For search_songs, I made the search case-insensitive by converting both the query and the field value to lowercase, teaching the importance of normalization in string comparisons to avoid missed matches. Lastly, in stats_section, we added a check for empty playlists to prevent errors, highlighting the need for defensive programming to handle edge cases gracefully.
+
+Students are most likely to make mistakes by assuming data consistency (like case sensitivity) or skipping edge case handling (like empty data). AI can help catch these issues by identifying patterns in code that may lead to errors, such as unhandled cases or inconsistent data access. However, AI can sometimes mislead by suggesting overly generic fixes or failing to consider the specific context of the code. Students should use AI as a guide but validate its suggestions through testing and a deeper understanding of the problem.
