@@ -13,7 +13,7 @@ DEFAULT_PROFILE = {
 
 
 def normalize_title(title: str) -> str:
-    """Normalize a song title for comparisons."""
+    """Normalize a song title for comparisons. """
     if not isinstance(title, str):
         return ""
     return title.strip()
