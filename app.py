@@ -14,7 +14,7 @@ from playlist_logic import (
 
 
 def init_state():
-    """Initialize Streamlit session state."""
+    """Initialize Streamlit session state. """
     if "songs" not in st.session_state:
         st.session_state.songs = default_songs()
     if "profile" not in st.session_state:
